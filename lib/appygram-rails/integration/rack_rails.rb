@@ -12,12 +12,16 @@ module Rack
       begin
         body = @app.call(env)
       rescue Exception => e
-        ::AppygramRails::Catcher.handle_with_controller(e,env['action_controller.instance'], Rack::Request.new(env))
+        unless e.is_a? ActionController::RoutingError
+          ::AppygramRails::Catcher.handle_with_controller(e,env['action_controller.instance'], Rack::Request.new(env))
+        end
         raise
       end
 
       if env['rack.exception']
-        ::AppygramRails::Catcher.handle_with_controller(env['rack.exception'],env['action_controller.instance'], Rack::Request.new(env))
+        unless env['rack.exception'].is_a? ActionController::RoutingError
+          ::AppygramRails::Catcher.handle_with_controller(env['rack.exception'],env['action_controller.instance'], Rack::Request.new(env))
+        end
       end
 
       body
