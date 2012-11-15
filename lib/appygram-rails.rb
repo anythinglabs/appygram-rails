@@ -19,6 +19,10 @@ module AppygramRails
 
   class << self
 
+    def report_all_exceptions!
+      @@ignored_classes = []
+    end
+
     def ignore_exception_class_name!(k)
       @@ignored_classes << k
     end
