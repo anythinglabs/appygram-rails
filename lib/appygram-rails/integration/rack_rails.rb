@@ -10,7 +10,7 @@ module Rack
 
     def handle_with_controller(exception, controller, request)
       unless ::AppygramRails.ignores_exception_class? exception
-        ::AppygramRails::Catcher.handle_with_controller(e,env['action_controller.instance'], Rack::Request.new(env))
+        ::AppygramRails::Catcher.handle_with_controller(exception, controller, request)
       end
     end
 
