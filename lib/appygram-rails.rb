@@ -14,7 +14,7 @@ module AppygramRails
 
   @@ignored_classes = [
     'ActiveRecord::RecordNotFound',
-    'ActiveController::RoutingException'
+    'ActionController::RoutingError'
   ]
 
   class << self
